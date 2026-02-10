@@ -1,7 +1,4 @@
 # Basic ChatBot for DMX project 
-""" for this project i will be using a simple intent recognition system.
- it will same as my previous project (PyAssist https://github.com/GAURAV-N-PATIL/PyAssist-User-Response-Assistant.git)
-"""
 import datetime
 import random
 
