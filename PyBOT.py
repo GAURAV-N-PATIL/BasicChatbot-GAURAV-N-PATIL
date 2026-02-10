@@ -2,96 +2,96 @@
 """ for this project i will be using a simple intent recognition system.
  it will same as my previous project (PyAssist https://github.com/GAURAV-N-PATIL/PyAssist-User-Response-Assistant.git)
 """
-# libraries Used
 import datetime
 import random
 
-def get_time_greeting():
+# Time-based greeting
+def time_greeting():
     hour = datetime.datetime.now().hour
     if hour < 12:
-        return "Pybot:Good Morning!"
+        return "Good Morning!"
     elif hour < 17:
-        return "Pybot:Good Afternoon!"
+        return "Good Afternoon!"
     else:
-        return "Pybot:Good Evening!"
+        return "Good Evening!"
 
+# Help Menu
+HELP_MESSAGE = """
+I can understand the following commands:
+
+- hello / hi / hey              → Greeting
+- your name                     → Know my name
+- how are you                   → Ask how I'm doing
+- weather                       → Weather info
+- joke                          → Hear a joke
+- math (example: 2 + 2)         → Simple calculation
+- help                          → Show help menu
+- bye / exit                    → End the chat
+"""
+
+# Jokes list
+JOKES = [
+    "Why do programmers prefer dark mode? Because light attracts bugs.",
+    "My code works… I have no idea why.",
+    "Debugging is like being a detective in your own code.",
+    "I tried to learn Python… turns out it doesn’t bite.",
+    "I would tell you a UDP joke… but you might not get it."
+]
+# Main Chatbot Function
 def chatbot():
-    print(get_time_greeting())
-    print("Pybot:Hello! I am a PyBOT - basic Python chatbot.")
+    print(time_greeting())
+    print("Hello! I am a basic rule-based Python chatbot 🤖")
+    print("Type 'help' to see what I can do.\n")
 
-# Intent
-Greeting_keywords = ["hello", "hi", "hey", "greetings","hey there","good morning","good afternoon","good evening","how are you","what's up","how's it going","hello there","hi PyBot"]
-Exit_keywords = ["exit", "quit", "goodbye", "bye","see you later","take care","farewell","catch you later","talk to you later","have a nice day","have a good day"]
-Identity_keywords = ["who are you", "what is your name", "what do you do", "what can you do","tell me about yourself","what's your name","what's your purpose","what's your function","what's your role"]
-Weather_keywords = ["weather"]
-intent = "Unknown"
-chat_history = []
+    while True:
+        user_input = input("You: ").lower().strip()
+        words = user_input.split()
 
-# Output response based on intent
-def output_response(intent):
+        # Exit command
+        if user_input in ["bye", "exit"]:
+            print("Bot: Goodbye! Have a great day 👋")
+            break
 
-    if intent == "Exit":
-        response = "Pybot:Goodbye! Have a great day 😊"
-        print("PyBot:", response)
-        chat_history.append(response)
-        exit()
+        # Help command
+        elif "help" in words:
+            print(HELP_MESSAGE)
 
-    elif intent == "Greeting":
-         response = random.choice([
-                "Pybot:Hello there!",
-                "Pybot:Hi! How can I help you?",
-                "Pybot:Hey! Nice to see you."
-            ])
-         
-    elif intent == "Identity":
-        response = "Pybot:I am PyBot, your personal assistant designed to help you with various tasks."
-
-    elif intent == "Weather":
-        response = "Pybot:I can't check live weather, but I hope it's nice outside!"
-
-    else:
-        response = "Pybot:I'm sorry, I didn't understand that command."
-
-    print(response)
-    chat_history.append(response)
-# respond to user input
-chatbot()
-while intent not in Exit_keywords:
-
-    # Normalization of user input
-    Userinput = input("You:")
-    Userinput = Userinput.lower()
-    Userinput = Userinput.strip()
-    chat_history.append(f"You: {Userinput}")
-
-    # Intent recognition
-    if Userinput in Greeting_keywords:
-        intent = "Greeting"
-    elif Userinput in Exit_keywords:
-        intent = "Exit"
-    elif Userinput in Identity_keywords:
-        intent = "Identity"
-    elif Userinput in Weather_keywords:
-        intent = "Weather"
-    elif Userinput == "help":
-        print("Pybot:enter \"weather\" to check get info on weather")
-    elif Userinput == "tell me joke":
-            print(random.choice([
-                "Pybot:Why do programmers prefer dark mode? Because light attracts bugs. 🐛",
-                "Pybot:Why did the Python programmer wear glasses? Because they couldn’t C.",
-                "Pybot:I tried to learn Python… Turns out it doesn’t bite. 🐍",
-                "Pybot:Why was the computer cold? It forgot to close its Windows.",
-                "Pybot:Why do Java developers wear glasses? Because they don’t C#."
+        # Greetings
+        elif any(word in words for word in ["hi", "hello", "hey"]):
+            print("Bot:", random.choice([
+                "Hello there! 😊",
+                "Hi! How can I help you?",
+                "Hey! Nice to see you."
             ]))
 
-    #respond to user input based on intent
-    output_response(intent)
+        # Bot name
+        elif "name" in words and "your" in words:
+            print("Bot: I am a rule-based Python chatbot.")
 
-    # Save conversation history
-    with open("chat_history.txt", "w") as file:
-        for line in chat_history:
-            file.write(line + "\n")
+        # How are you
+        elif "how" in words and "you" in words:
+            print("Bot: I'm doing great! Thanks for asking 😊")
 
-# main function            
+        # Weather
+        elif "weather" in words:
+            print("Bot: I can't check live weather, but I hope it's nice outside!")
+
+        # Joke
+        elif "joke" in words:
+            print("Bot:", random.choice(JOKES))
+
+        # Math calculation
+        elif any(op in user_input for op in ["+", "-", "*", "/"]):
+            try:
+                result = eval(user_input)
+                print(f"Bot: The answer is {result}")
+            except:
+                print("Bot: Sorry, I couldn't calculate that.")
+
+        # Default response
+        else:
+            print("Bot: Sorry, I didn’t understand that.")
+
+# Program Start
 if __name__ == "__main__":
     chatbot()
