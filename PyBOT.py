@@ -40,7 +40,7 @@ JOKES = [
 # Main Chatbot Function
 def chatbot():
     print(time_greeting())
-    print("Hello! I am a basic rule-based Python chatbot 🤖")
+    print("Hello! I am a basic rule-based Python chatbot-PyBot 🤖")
     print("Type 'help' to see what I can do.\n")
 
     while True:
