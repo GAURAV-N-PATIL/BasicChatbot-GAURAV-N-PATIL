@@ -1,0 +1,2 @@
+You: tell me joke
+Pybot:I'm sorry, I didn't understand that command.
