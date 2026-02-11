@@ -94,6 +94,7 @@ python chatbot.py
 ```
 BasicChatbot-YourName/
 │
+├── images
 ├── chatbot.py
 ├── README.md
 └── screenshots/
@@ -107,10 +108,13 @@ BasicChatbot-YourName/
 Include screenshots of:
 
 * Chatbot startup
+![Chatbot startup](<images/Screenshot 2026-02-11 205732.png>)
 
 * User interaction
+![User intraction](<images/Screenshot 2026-02-11 205810.png>)
 
 * Exit message
+![Exit message](<images/Screenshot 2026-02-11 205825.png>)
 
 ---
 
